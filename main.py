@@ -12,7 +12,14 @@ MAX_NBR_STOCKS_TO_BUY = 20
 CSV_PATHS = (r"datasets_csv\dataset0.csv", r"datasets_csv\dataset1.csv",
              r"datasets_csv\dataset2.csv")
 
-def choose_dataset():
+
+def choose_dataset() -> str:
+    '''
+    Take user input to select a set of data.
+
+    Return selection as str(nbr).
+    '''
+
     dataset_ref = input("[1] Dataset_test\n[2] Dataset_1\n[3] Dataset_2\n>> ")
     if dataset_ref == str(1):
         path = CSV_PATHS[0]

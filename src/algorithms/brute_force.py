@@ -10,8 +10,8 @@ class BruteForceAlgorithm(BaseAlgorithm):
         Go through the list of stocks, and using a binary representation,
         check if current stock is in it.
 
-        Update class parameters to match the best possible combination in terms of
-        benefit.
+        Update class parameters to match the best possible combination
+        in terms of benefit.
 
         Space complexity: O(2^N)
         Time complexity : O(2^N)

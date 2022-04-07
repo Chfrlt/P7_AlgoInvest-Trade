@@ -24,7 +24,8 @@ class OptimisedAlgorithm(BaseAlgorithm):
         for h in range(1, self.max_nbr_stocks_to_buy + 1):
             for i in range(1, len(self.stocks) + 1):
                 for j in range(1, self.budget + 1):
-                    if self.stocks[i - 1].price <= j and self.stocks[i - 1].price >= 0:
+                    if (self.stocks[i - 1].price <= j and
+                            self.stocks[i - 1].price >= 0):
                         previous_price = math.ceil(self.stocks[i - 1].price)
                         buy = (
                             self.matrix[h - 1][i - 1][j - previous_price]
@@ -48,7 +49,8 @@ class OptimisedAlgorithm(BaseAlgorithm):
         h = self.max_nbr_stocks_to_buy
         while i > 0:
             stock = self.stocks[i - 1]
-            if (self.matrix[h][i][self.budget] > self.matrix[h][i - 1][self.budget]):
+            if (self.matrix[h][i][self.budget] >
+                    self.matrix[h][i - 1][self.budget]):
                 curr_combination.append(stock)
                 self.budget -= math.ceil(stock.price)
                 h -= 1
