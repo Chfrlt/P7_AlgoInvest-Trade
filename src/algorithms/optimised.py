@@ -3,7 +3,6 @@ from models.base_algo import BaseAlgorithm
 
 
 class OptimisedAlgorithm(BaseAlgorithm):
-
     def __init__(self, stocks: list, budget: int,
                  max_nbr_stocks_to_buy: int):
         super().__init__(stocks, budget, max_nbr_stocks_to_buy)
@@ -17,9 +16,6 @@ class OptimisedAlgorithm(BaseAlgorithm):
         '''
         Go through the matrix indexes and either buy the current stock,
         or skip it, filling up the matrix in the process.
-
-        Space complexity: O(N)
-        Time complexity : O(N)
         '''
         for h in range(1, self.max_nbr_stocks_to_buy + 1):
             for i in range(1, len(self.stocks) + 1):

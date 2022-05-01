@@ -7,9 +7,6 @@ class GreedyAlgorithm(BaseAlgorithm):
         '''
         With x = self.max_nbr_to_buy (int)
         Sort the stocks by ratio, and buy the x best.
-
-        Space complexity : O(N)
-        Time complexity : O(N)
         '''
         sorted(self.stocks, reverse=True)
         curr_combination = []

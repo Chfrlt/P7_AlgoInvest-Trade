@@ -6,9 +6,6 @@ from models.base_algo import BaseAlgorithm
 class Recursive(BaseAlgorithm):
     '''
     Simple recursive method.
-
-    Space complexity: O(2^N)
-    Time complexity : O(2^N)
     '''
 
     def resolve(self, stock_index: int = None,

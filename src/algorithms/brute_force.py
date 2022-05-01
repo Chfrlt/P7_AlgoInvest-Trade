@@ -12,9 +12,6 @@ class BruteForceAlgorithm(BaseAlgorithm):
 
         Update class parameters to match the best possible combination
         in terms of benefit.
-
-        Space complexity: O(2^N)
-        Time complexity : O(2^N)
         '''
         nbr_possible_combination = 2 ** len(self.stocks)
         for i in range(nbr_possible_combination):
