@@ -6,6 +6,9 @@ class OptimisedAlgorithm(BaseAlgorithm):
     def __init__(self, stocks: list, budget: int,
                  max_nbr_stocks_to_buy: int):
         super().__init__(stocks, budget, max_nbr_stocks_to_buy)
+        self.matrix = []
+
+    def set_up_matrix(self):
         self.matrix = (
             [[[0 for _ in range(self.budget + 1)] for
                 _ in range(len(self.stocks) + 1)] for
@@ -36,7 +39,7 @@ class OptimisedAlgorithm(BaseAlgorithm):
         '''Function to find the stock combination.
         We start from the matrix box containing the solution, tracing back.
 
-        If there is a benefit difference btween a box and the next one,
+        If there is a benefit difference between a box and the next one,
         the stock was bought.
 
         Update class parameters to match the solution'''
@@ -56,5 +59,6 @@ class OptimisedAlgorithm(BaseAlgorithm):
         self.benefit = sum(stock.benefit for stock in curr_combination)
 
     def resolve(self):
+        self.set_up_matrix()
         self.fill_matrix()
         self.get_combination()
