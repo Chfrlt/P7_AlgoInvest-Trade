@@ -4,7 +4,7 @@ class Stock:
         self.price = price
         self.percent = benefit / 100
         self.benefit = self.price * self.percent
-        self.ratio = self.benefit // self.price if self.price > 0 else 1
+        self.ratio = self.benefit // self.price if self.price > 0 else 0
 
     def __repr__(self) -> str:
         return f"{self.name}"

@@ -11,42 +11,66 @@ from src.algorithms.optimised import OptimisedAlgorithm
 BUDGET = 500
 MAX_NBR_STOCKS_TO_BUY = 20
 
-def main():
-    paths = []
-    for dataset in sys.argv[1:]:
-        paths.append(f"datasets_csv\{dataset}.csv")
-    for path in paths:
-        stocks = csv_reader.get_datas(path)
+def truncate_result_file() -> None:
+    '''
+    Delete the content in .\results\results.txt
+    '''
+    with open(r"results\results.txt", 'r+') as f:
+        f.seek(0)
+        f.truncate()
+        f.close()
 
+def write_result_file(string: str)  -> None:
+    '''
+    Write string into .\results\results.txt
+    '''
+    with open(r"results\results.txt", 'a') as f:
+        f.write(f"{string}\n")
+        f.close()
+
+def main():
+    truncate_result_file()
+    for dataset in sys.argv[1:]:
+        write_result_file(dataset)
+        path = f"datasets_csv\{dataset}.csv"
+        stocks = csv_reader.get_datas(path)
+    
         if len(stocks) <= 20:
             # BruteForce:
             start_time = time.time()
             r = BruteForceAlgorithm(stocks, BUDGET, MAX_NBR_STOCKS_TO_BUY)
             r.resolve()
-            print(f"\nBrute force:\n{r}")
-            print(f"Execution time: {(time.time() - start_time)}s")
+            time_spend = f"Execution time: {(time.time() - start_time)}s"
+            result = f"Brute force:\n{r}\n{time_spend}"
+            print(result)
+            write_result_file(result)
 
             # Recursive:
             start_time = time.time()
             r = Recursive(stocks, BUDGET, MAX_NBR_STOCKS_TO_BUY)
             r.resolve()
-            print(f"\nRecursive method:\n{r}")
-            print(f"Execution time: {(time.time() - start_time)}s")
+            time_spend = f"Execution time: {(time.time() - start_time)}s"
+            result = f"Recursive method:\n{r}\n{time_spend}"
+            print(result)
+            write_result_file(result)
 
         # Greedy:
         start_time = time.time()
         r = GreedyAlgorithm(stocks, BUDGET, MAX_NBR_STOCKS_TO_BUY)
         r.resolve()
-        print(f"\nGreedy:\n{r}")
-        print(f"Execution time: {(time.time() - start_time)}s")
+        time_spend = f"Execution time: {(time.time() - start_time)}s"
+        result = f"Greedy:\n{r}\n{time_spend}"
+        print(result)
+        write_result_file(result)
 
         # Optimised:
         start_time = time.time()
         r = OptimisedAlgorithm(stocks, BUDGET, MAX_NBR_STOCKS_TO_BUY)
         r.resolve()
-        print(f"\nOptimised:\n{r}")
-        print(f"Execution time: {(time.time() - start_time)}s")
-
+        time_spend = f"Execution time: {(time.time() - start_time)}s"
+        result = f"Optimised:\n{r}\n{time_spend}\n"
+        print(result)
+        write_result_file(result)
 
 if __name__ == "__main__":
     main()

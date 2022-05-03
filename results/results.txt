@@ -1,0 +1,24 @@
+dataset1
+Greedy:
+Purchased: [Share-DUPH, Share-GTAN, Share-USUF, Share-CFOZ, Share-QLRX, Share-XJDT, Share-HKFP, Share-PPPH, Share-HLJY, Share-YKBD]
+Total benefit: 37.480316
+Cost: 146.67
+Execution time: 0.0s
+Optimised:
+Purchased: [Share-GRUT, Share-HITN]
+Total benefit: 196.83557499999998
+Cost: 499.43
+Execution time: 2.6302287578582764s
+
+dataset2
+Greedy:
+Purchased: [Share-MOEX, Share-GBGY, Share-AXWK, Share-FJTI, Share-LGDP, Share-GEBJ, Share-GGNT, Share-FDLS, Share-JDYS, Share-TNOV]
+Total benefit: 32.523346
+Cost: 137.35000000000002
+Execution time: 0.012462139129638672s
+Optimised:
+Purchased: [Share-MBQU, Share-MALJ, Share-OPBR, Share-ANFX, Share-FWMV, Share-QEVK, Share-JWGF, Share-DLNE, Share-IJFT, Share-HATC]
+Total benefit: 162.56706000000003
+Cost: 443.94
+Execution time: 2.2877743244171143s
+
