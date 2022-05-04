@@ -1,4 +1,5 @@
 import math
+from itertools import product
 from models.base_algo import BaseAlgorithm
 
 
@@ -8,32 +9,36 @@ class OptimisedAlgorithm(BaseAlgorithm):
         super().__init__(stocks, budget, max_nbr_stocks_to_buy)
         self.matrix = []
 
-    def set_up_matrix(self):
+    def set_up_matrix(self) -> None:
         self.matrix = (
             [[[0 for _ in range(self.budget + 1)] for
                 _ in range(len(self.stocks) + 1)] for
                 _ in range(self.max_nbr_stocks_to_buy + 1)]
                 )
+    
+    def get_matrix_indexes(self) -> product:
+        return product(range(1, self.max_nbr_stocks_to_buy + 1),
+                       range(1, len(self.stocks) + 1),
+                       range(1, self.budget + 1))
+
 
     def fill_matrix(self) -> None:
         '''
         Go through the matrix indexes and either buy the current stock,
-        or skip it, filling up the matrix in the process.
+        or skip it, updating the class argument matrix in the process.
         '''
-        for h in range(1, self.max_nbr_stocks_to_buy + 1):
-            for i in range(1, len(self.stocks) + 1):
-                for j in range(1, self.budget + 1):
-                    if (self.stocks[i - 1].price <= j and
-                            self.stocks[i - 1].price >= 0):
-                        previous_price = math.ceil(self.stocks[i - 1].price)
-                        buy = (
-                            self.matrix[h - 1][i - 1][j - previous_price]
-                            + self.stocks[i - 1].benefit
-                            )
-                        skip = self.matrix[h][i - 1][j]
-                        self.matrix[h][i][j] = max(buy, skip)
-                    else:
-                        self.matrix[h][i][j] = self.matrix[h][i - 1][j]
+        for h, i, j in [p for p in self.get_matrix_indexes()]:
+            if (self.stocks[i - 1].price <= j and
+                    self.stocks[i - 1].price >= 0):
+                previous_price = math.ceil(self.stocks[i - 1].price)
+                buy = (
+                    self.matrix[h - 1][i - 1][j - previous_price]
+                    + self.stocks[i - 1].benefit
+                    )
+                skip = self.matrix[h][i - 1][j]
+                self.matrix[h][i][j] = max(buy, skip)
+            else:
+                self.matrix[h][i][j] = self.matrix[h][i - 1][j]
 
     def get_combination(self) -> None:
         '''Function to find the stock combination.
@@ -55,6 +60,7 @@ class OptimisedAlgorithm(BaseAlgorithm):
                 h -= 1
             i -= 1
         self.combination = curr_combination
+        print(sum(stock.price for stock in curr_combination))
         self.cost = sum(stock.price for stock in curr_combination)
         self.benefit = sum(stock.benefit for stock in curr_combination)
 

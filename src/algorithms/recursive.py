@@ -10,7 +10,7 @@ class Recursive(BaseAlgorithm):
 
     def resolve(self, stock_index: int = None,
                 curr_budget: Union[int, float] = None,
-                curr_combination: list = None):
+                curr_combination: list = None) -> tuple:
         if curr_combination is None:
             curr_combination = []
         if stock_index is None:
